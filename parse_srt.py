@@ -1,6 +1,6 @@
 import srt
 
-def extract_srt() -> [str]:
+def extract_srt(srt_file) -> [str]:
     result = []
 
     with open(srt_file, 'r') as file:
@@ -11,5 +11,3 @@ def extract_srt() -> [str]:
             result.append(content)
 
     return result
-
-extract_srt()
