@@ -1,0 +1,15 @@
+import srt
+
+def extract_srt() -> [str]:
+    result = []
+
+    with open(srt_file, 'r') as file:
+        subtitle_content = file.read()
+
+        for line in srt.parse(subtitle_content):
+            content = line.content.replace('\n', '')
+            result.append(content)
+
+    return result
+
+extract_srt()
