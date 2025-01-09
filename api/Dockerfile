@@ -1,6 +1,8 @@
-FROM python:3.13-alpine
+FROM python
 
 WORKDIR /src
+
+RUN apt-get -y install libpq-dev
 
 COPY . .
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
