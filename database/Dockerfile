@@ -11,6 +11,8 @@ RUN make USE_PGXS=1 PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config install
 
 RUN perl -pi -E "s/LANGUAGE 'C'/LANGUAGE 'c'/" textsearch_ja.sql
 
-COPY *.sql /docker-entrypoint-initdb.d/
-RUN cp textsearch_ja.sql /docker-entrypoint-initdb.d/
+RUN mkdir /scripts
+RUN cp textsearch_ja.sql /scripts
+COPY *.sql /scripts
 
+COPY init.sh /docker-entrypoint-initdb.d/
