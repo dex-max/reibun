@@ -1,2 +1,4 @@
 Flask
 psycopg2
+requests
+srt

@@ -33,6 +33,7 @@ services:
       - "${FLASK_PORT}:5000"
     volumes:
       - ./api:/src
+      - ./data:/src/data
 
 volumes:
   postgres_data:
