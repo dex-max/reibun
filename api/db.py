@@ -5,6 +5,7 @@ from psycopg2 import connect, sql
 from psycopg2.extras import execute_batch, RealDictCursor
 
 class SentenceEntry(TypedDict):
+    id: int
     content: str
 
 class SentenceDB:
@@ -17,7 +18,13 @@ class SentenceDB:
     def search_sentences(self, search_term: str) -> list[SentenceEntry]:
         cursor = self.connection.cursor(cursor_factory=RealDictCursor)
         
-        cursor.execute("SELECT content FROM sentence WHERE to_tsvector('japanese', content) @@ to_tsquery('japanese', %s)", (search_term,))
+        query = sql.SQL(
+            "SELECT {fields} FROM sentence WHERE to_tsvector('japanese', content) @@ to_tsquery('japanese', %s)"
+        ).format(
+            fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys()))
+        )
+
+        cursor.execute(query, (search_term,))
         sentences = cursor.fetchall()
         cursor.close()
 
