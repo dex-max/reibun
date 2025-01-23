@@ -35,5 +35,16 @@ services:
       - ./api:/src
       - ./data:/src/data
 
+  web:
+    build:
+      context: ./web
+    command: npm run dev -- --host
+    depends_on:
+      - api
+    ports:
+      - 5173:5173
+    volumes:
+      - ./web:/src
+      - /src/node_modules
 volumes:
   postgres_data:
