@@ -1,6 +1,7 @@
 import os
 import psycopg2
 import subtitle.parser
+import sys
 
 SOURCES_PATH = 'data/'
 
@@ -21,6 +22,10 @@ def build_jimaku(connection) -> None:
             srt_path = os.path.join(JIMAKU_PATH, jimaku_id, sub_name)
             sentences = subtitle.parser.extract_sentences(srt_path)
             insert_sentences(connection, sentences)
+    
+    cursor = connection.cursor()
+    cursor.execute("CREATE INDEX content_vector_idx ON sentence USING GIN (to_tsvector('japanese', content))")
+    connection.commit()
 
 def build_all(user: str, password: str) -> None:
     connection = psycopg2.connect(host='db', port=5432, user=user, password=password, dbname="reibun")
