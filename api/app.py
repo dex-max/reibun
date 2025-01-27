@@ -1,7 +1,9 @@
 from flask import Flask, request
+from flask_cors import CORS
 from db import SentenceDB
 
 app = Flask(__name__)
+CORS(app)
 sentenceDB = SentenceDB()
 
 @app.route('/sentences')
