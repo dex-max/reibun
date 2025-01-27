@@ -41,6 +41,9 @@ services:
     command: npm run dev -- --host
     depends_on:
       - api
+    environment:
+      VITE_API_HOSTNAME: ${FLASK_HOSTNAME}
+      VITE_API_PORT: ${FLASK_PORT}
     ports:
       - 5173:5173
     volumes:
