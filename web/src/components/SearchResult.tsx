@@ -1,21 +1,33 @@
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
-const SearchResult = () => {
+import { Sentence } from './Body'
+
+const SearchResult = ({ entries }: {entries: Sentence[]}) => {
+  if (entries.length === 0) {
+    return <div>No results found</div>
+  }
+
+  const cardList = entries.map(entry => {
     return (
-        <Card className="my-4 h-48">
-            <CardContent className="my-5">
-                <div className="flex justify-between">
-                    <p className="text-lg mr-5">This is a test sentence from the search result. Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                    <Button><Copy />Copy</Button>
-                </div>
-                <small className="block mt-4 text-base text-zinc-700">Source: My brain</small>
-            </CardContent>
-            <CardFooter>
-            </CardFooter>
-        </Card>
+      <Card key={entry.id} className="my-4 h-48">
+        <CardContent className="my-5">
+          <div className="flex justify-between">
+            <p className="text-lg mr-5">{entry.content}</p>
+            <Button><Copy />Copy</Button>
+          </div>
+        </CardContent>
+      </Card>
     )
+  });
+
+  return (
+    <div className="mt-10">
+      <h2 className="text-xl">Search results</h2>
+      {cardList}
+    </div>
+  )
 }
 
 export default SearchResult;
