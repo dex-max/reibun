@@ -16,8 +16,13 @@ def get_sentences():
         }
         return no_search_response, 400
 
-    response = {
-        'data': sentenceDB.search_sentences(search_term)
-    }
-
-    return response
+    try:
+        response = {
+            'data': sentenceDB.search_sentences(search_term)
+        }
+        return response
+    except Exception as e:
+        error_response = {
+            'error': { 'code': 500, 'message': str(e)}
+        }
+        return error_response, 500
