@@ -36,17 +36,17 @@ const SearchBar = ({
 
       const response = await fetch(url);
 
-      if (response.status !== 200) {
-        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData?.error?.message ?? 'No error message');
       }
 
       const apiData = await response.json();
 
       setEntries(apiData['data']);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error('Error fetching sentences: ', error);
     }
-
   }
 
   return (
