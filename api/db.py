@@ -1,3 +1,4 @@
+import sys
 import os
 from typing import cast, TypedDict
 
@@ -16,31 +17,30 @@ class SentenceDB:
         self.connection = connect(host='db', port=port, user=user, password=password, dbname="reibun")
 
     def search_sentences(self, search_term: str) -> list[SentenceEntry]:
-        cursor = self.connection.cursor(cursor_factory=RealDictCursor)
-        
-        query = sql.SQL(
-            "SELECT {fields} FROM sentence WHERE to_tsvector('japanese', content) @@ to_tsquery('japanese', %s)"
-        ).format(
-            fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys()))
-        )
+        with self.connection as connection:
+            with connection.cursor(cursor_factory=RealDictCursor) as cursor:
+                query = sql.SQL(
+                    "SELECT {fields} FROM sentence WHERE to_tsvector('japanese', content) @@ to_tsquery('japanese', %s)"
+                ).format(
+                    fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys()))
+                )
 
-        cursor.execute(query, (search_term,))
-        sentences = cursor.fetchall()
-        cursor.close()
+                cursor.execute(query, (search_term,))
 
-        return [cast(SentenceEntry, sentence) for sentence in sentences]
+                sentences = cursor.fetchall()
+                return [cast(SentenceEntry, sentence) for sentence in sentences]
 
     def store_sentences(self, sentences: list[SentenceEntry]) -> None:
-        cursor = self.connection.cursor()
+        with self.connection as connection:
+            with connection.cursor() as cursor:
+                query = sql.SQL(
+                    "INSERT INTO sentence {fields} VALUES {values}"
+                ).format(
+                    fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys())),
+                    values=sql.SQL(',').join(sql.Placeholder() * len(SentenceEntry.__annotations__))
+                )
 
-        query = sql.SQL(
-            "INSERT INTO sentence {fields} VALUES {values}"
-        ).format(
-            fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys())),
-            values=sql.SQL(',').join(sql.Placeholder() * len(SentenceEntry.__annotations__))
-        )
-
-        execute_batch(cursor, query, sentences)
-        
-        self.connection.commit()
-        cursor.close()
+                execute_batch(cursor, query, sentences)
+                
+                self.connection.commit()
+                cursor.close()
