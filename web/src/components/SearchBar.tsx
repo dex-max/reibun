@@ -30,9 +30,7 @@ const SearchBar = ({
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      const hostname = import.meta.env.VITE_API_HOSTNAME;
-      const port = import.meta.env.VITE_API_PORT;
-      const url = `http://${hostname}:${port}/sentences?search-term=${data.searchTerm}`;
+      const url = `/api/sentences?search-term=${data.searchTerm}`;
 
       const response = await fetch(url);
 
