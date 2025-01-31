@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 sentenceDB = SentenceDB()
 
-@app.route('/sentences')
+@app.route('/api/sentences')
 def get_sentences():
     search_term = request.args.get('search-term')
 
