@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 
 import { Search } from 'lucide-react'
 import { z } from 'zod'
@@ -8,19 +9,16 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Form, FormField, FormItem, FormControl } from '@/components/ui/form'
 
-import { Sentence } from './Body'
-
 const formSchema = z.object({
   searchTerm: z.string()
 })
 
 const SearchBar = ({
-  setEntries,
   className
 }: {
-  setEntries: React.Dispatch<React.SetStateAction<Sentence[]>>,
   className?: string
 }) => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,22 +27,7 @@ const SearchBar = ({
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    try {
-      const url = `/api/sentences?search-term=${data.searchTerm}`;
-
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.error?.message ?? 'No error message');
-      }
-
-      const apiData = await response.json();
-
-      setEntries(apiData['data']);
-    } catch (error) {
-      console.error('Error fetching sentences: ', error);
-    }
+    navigate(`/search/${data.searchTerm}`);
   }
 
   return (
