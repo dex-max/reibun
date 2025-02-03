@@ -1,8 +1,8 @@
 import { Copy } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
-import { Sentence } from '@/routes/SearchPage';
+import { Sentence } from '@/routes/SearchPage'
 
 const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
   if (sentences.length === 0) {
@@ -14,7 +14,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
       <Card key={sentence.id} className="my-4 h-48">
         <CardContent className="my-5">
           <div className="flex justify-between">
-            <p className="text-lg mr-5">{sentence.content}</p>
+            <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg mr-5"></p>
             <Button><Copy />Copy</Button>
           </div>
         </CardContent>
