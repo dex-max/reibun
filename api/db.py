@@ -24,6 +24,7 @@ class SentenceDB:
                     SELECT id, ts_headline('japanese', content, search_term, 'HighlightAll=true') AS content
                     FROM sentence, phraseto_tsquery('japanese', %s) AS search_term
                     WHERE to_tsvector('japanese', content) @@ search_term
+                    LIMIT 50
                     """
                 )
 
