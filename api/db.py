@@ -20,9 +20,11 @@ class SentenceDB:
         with self.connection as connection:
             with connection.cursor(cursor_factory=RealDictCursor) as cursor:
                 query = sql.SQL(
-                    "SELECT {fields} FROM sentence WHERE to_tsvector('japanese', content) @@ phraseto_tsquery('japanese', %s)"
-                ).format(
-                    fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys()))
+                    """
+                    SELECT id, ts_headline('japanese', content, search_term, 'HighlightAll=true') AS content
+                    FROM sentence, phraseto_tsquery('japanese', %s) AS search_term
+                    WHERE to_tsvector('japanese', content) @@ search_term
+                    """
                 )
 
                 cursor.execute(query, (search_term,))
