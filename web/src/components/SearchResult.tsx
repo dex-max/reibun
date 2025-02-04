@@ -11,12 +11,9 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
 
   const cardList = sentences.map(sentence => {
     return (
-      <Card key={sentence.id} className="my-4 h-48">
-        <CardContent className="my-5">
-          <div className="flex justify-between">
-            <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg mr-5"></p>
-            <Button><Copy />Copy</Button>
-          </div>
+      <Card key={sentence.id} className="my-4">
+        <CardContent className="p-5">
+          <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg"></p>
         </CardContent>
       </Card>
     )
