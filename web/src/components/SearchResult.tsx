@@ -13,7 +13,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
     return (
       <Card key={sentence.id} className="my-4">
         <CardContent className="p-5">
-          <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg"></p>
+          <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg [&>b]:text-[#8338EC]"></p>
         </CardContent>
       </Card>
     )
