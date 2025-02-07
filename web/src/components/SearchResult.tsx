@@ -1,7 +1,4 @@
-import { Copy } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-
 import { Sentence } from '@/routes/SearchPage'
 
 const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
@@ -11,7 +8,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
 
   const cardList = sentences.map(sentence => {
     return (
-      <Card key={sentence.id} className="my-4">
+      <Card key={sentence.id}>
         <CardContent className="p-5">
           <p dangerouslySetInnerHTML={{ __html: sentence.content }} className="text-lg [&>b]:text-[#8338EC]"></p>
         </CardContent>
@@ -21,8 +18,10 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
 
   return (
     <div className="mt-10">
-      <h2 className="text-xl">Search results</h2>
-      {cardList}
+      <h2 className="text-xl mb-5">Search results</h2>
+      <div className="flex flex-col gap-3">
+        {cardList}
+      </div>
     </div>
   )
 }
