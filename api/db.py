@@ -32,18 +32,3 @@ class SentenceDB:
 
                 sentences = cursor.fetchall()
                 return [cast(SentenceEntry, sentence) for sentence in sentences]
-
-    def store_sentences(self, sentences: list[SentenceEntry]) -> None:
-        with self.connection as connection:
-            with connection.cursor() as cursor:
-                query = sql.SQL(
-                    "INSERT INTO sentence {fields} VALUES {values}"
-                ).format(
-                    fields=sql.SQL(',').join(map(sql.Identifier, SentenceEntry.__annotations__.keys())),
-                    values=sql.SQL(',').join(sql.Placeholder() * len(SentenceEntry.__annotations__))
-                )
-
-                execute_batch(cursor, query, sentences)
-                
-                self.connection.commit()
-                cursor.close()
