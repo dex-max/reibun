@@ -8,11 +8,6 @@ from language.typing import Sentence
 from language.segmenter import Segmenter
 
 
-class SentenceEntry(TypedDict):
-    id: int
-    content: str
-
-
 class SentenceDB:
     def __init__(self):
         user = os.environ.get("SQL_USERNAME")
@@ -23,7 +18,7 @@ class SentenceDB:
         )
         self.segmenter = Segmenter()
 
-    def search_sentences(self, search_term: str) -> list[SentenceEntry]:
+    def search_sentences(self, search_term: str) -> list[Sentence]:
         with self.connection as connection:
             with connection.cursor(cursor_factory=RealDictCursor) as cursor:
                 query = sql.SQL(

@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
+import type { Sentence } from '@/types/language'
 import SearchBar from '@/components/SearchBar'
 import SearchResult from '@/components/SearchResult'
-
-export interface Sentence {
-  id: number;
-  content: string;
-}
 
 const SearchPage = () => {
   const { searchTerm } = useParams();
