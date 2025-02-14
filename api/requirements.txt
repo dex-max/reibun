@@ -2,3 +2,5 @@ Flask
 flask-cors
 psycopg2
 requests
+sudachipy
+sudachidict_core
