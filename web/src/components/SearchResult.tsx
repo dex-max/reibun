@@ -15,7 +15,15 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
           {sentence.segments.map((segment, i) => {
             return (
               <HoverCard key={i} openDelay={50} closeDelay={20}>
-                <HoverCardTrigger><span className="relative text-lg border-b-2 border-dotted border-zinc-400 pb-0.5 mr-1">{segment.surface}</span></HoverCardTrigger>
+                <HoverCardTrigger>
+                  <span className={`relative text-lg border-b-2 border-dotted pb-0.5 mr-1 ${segment.highlight ? 'border-[#B28DDF]' : 'border-zinc-400'}`}>
+                    {segment.highlight ? (
+                      <strong className="text-[#8338EC]">{segment.surface}</strong>
+                    ) : (
+                      <span>{segment.surface}</span>
+                    )}
+                  </span>
+                </HoverCardTrigger>
                 <HoverCardContent side="top">
                   {segment.dictionary_form}
                 </HoverCardContent>

@@ -35,6 +35,8 @@ class SentenceDB:
                 sentences = cursor.fetchall()
 
                 for sentence in sentences:
-                    sentence["segments"] = self.segmenter.segmentize(text=sentence["content"])
+                    sentence["segments"] = self.segmenter.segmentize(
+                        sentence["content"], search_term
+                    )
 
                 return [cast(Sentence, sentence) for sentence in sentences]
