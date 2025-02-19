@@ -18,9 +18,9 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
                 <HoverCardTrigger>
                   <span className={`relative text-lg border-b-2 border-dotted pb-0.5 mr-1 ${segment.highlight ? 'border-[#B28DDF]' : 'border-zinc-400'}`}>
                     {segment.highlight ? (
-                      <strong className="text-[#8338EC]">{segment.surface}</strong>
+                      <strong className="text-[#8338EC] text-nowrap">{segment.surface}</strong>
                     ) : (
-                      <span>{segment.surface}</span>
+                      <span className="text-nowrap">{segment.surface}</span>
                     )}
                   </span>
                 </HoverCardTrigger>
