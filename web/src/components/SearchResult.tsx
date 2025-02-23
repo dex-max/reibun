@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 
 import type { Sentence } from '@/types/language'
+import DictionaryPopup from './DictionaryPopup'
 
 const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
   if (sentences.length === 0) {
@@ -25,7 +26,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
                   </span>
                 </HoverCardTrigger>
                 <HoverCardContent side="top">
-                  {segment.dictionaryForm}
+                  <DictionaryPopup segment={segment} />
                 </HoverCardContent>
               </HoverCard>
             )
