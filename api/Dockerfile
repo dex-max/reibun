@@ -1,10 +1,8 @@
-FROM python
+FROM gradle:latest
 
-WORKDIR /src
-
-RUN apt-get -y install libpq-dev
+RUN mkdir /api
+WORKDIR /api
 
 COPY . .
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-CMD ["flask", "--app", "app", "run", "--host=0.0.0.0", "--debug"]
+CMD gradle build --continuous & gradle run
