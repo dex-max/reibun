@@ -2,7 +2,7 @@
 [versions]
 h2-version = "2.3.232"
 kotlin-version = "2.1.10"
-ktor-version = "3.1.0"
+ktor-version = "3.1.1"
 logback-version = "1.4.14"
 postgres-version = "42.7.5"
 
@@ -13,10 +13,9 @@ ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negoti
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres-version" }
 h2 = { module = "com.h2database:h2", version.ref = "h2-version" }
 ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor-version" }
-ktor-server-host-common = { module = "io.ktor:ktor-server-host-common", version.ref = "ktor-version" }
-ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor-version" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-version" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
 
