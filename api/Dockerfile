@@ -5,4 +5,4 @@ WORKDIR /api
 
 COPY . .
 
-CMD gradle build --continuous & gradle run
+CMD gradle build --continuous & gradle run --continuous
