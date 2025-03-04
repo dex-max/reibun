@@ -13,5 +13,5 @@ fun Application.module() {
         json()
     }
 
-    configureRouting()
+    configureRouting(getPostgresConnection())
 }
