@@ -2,5 +2,11 @@ ktor:
     application:
         modules:
             - net.reibun.ApplicationKt.module
+    development: true
     deployment:
         port: 8080
+
+postgres:
+    url: "jdbc:postgresql://db:5432/reibun"
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
