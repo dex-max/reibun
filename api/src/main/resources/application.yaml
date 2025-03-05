@@ -8,5 +8,5 @@ ktor:
 
 postgres:
     url: "jdbc:postgresql://db:5432/reibun"
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    username: $POSTGRES_USERNAME
+    password: $POSTGRES_PASSWORD
