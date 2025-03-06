@@ -4,10 +4,10 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.sql.Connection
-import net.reibun.models.SentenceDB
+import net.reibun.database.SentenceDatabase
 
 fun Application.configureRouting(connection: Connection) {
-    val sentenceDB = SentenceDB(connection)
+    val sentenceDB = SentenceDatabase(connection)
 
     routing {
         get("/") {
