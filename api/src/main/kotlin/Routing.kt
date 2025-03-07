@@ -15,14 +15,16 @@ fun Application.configureRouting(connection: Connection) {
         }
 
         get("/api/sentences") {
-            val query = call.request.queryParameters["search-term"]
-            if (query.isNullOrBlank()) {
-                call.respond(mapOf("error" to "No search"))
+            val search = call.request.queryParameters["search-term"]
+            if (search.isNullOrBlank()) {
+                call.respond(mapOf(
+                    "error" to mapOf("code" to 400, "message" to "No search term")
+                ))
                 return@get
             }
 
-            val results = sentenceDB.searchSentences(query)
-            call.respond(results)
+            val results = sentenceDB.searchSentences(search)
+            call.respond(mapOf("data" to results))
         }
     }
 }
