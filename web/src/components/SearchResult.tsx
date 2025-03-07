@@ -25,7 +25,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
                   </span>
                 </HoverCardTrigger>
                 <HoverCardContent side="top">
-                  {segment.dictionary_form}
+                  {segment.dictionaryForm}
                 </HoverCardContent>
               </HoverCard>
             )

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: true,
     proxy: {
-      '/api': 'http://api:5000'
+      '/api': 'http://api:8080'
     }
   },
   plugins: [react()],

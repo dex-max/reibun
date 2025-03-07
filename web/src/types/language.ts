@@ -7,7 +7,7 @@ interface Morpheme {
 
 interface Segment {
   surface: string;
-  dictionary_form: string;
+  dictionaryForm: string;
   morphemes: Morpheme[];
   highlight: boolean;
 }
