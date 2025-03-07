@@ -15,7 +15,6 @@ application {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -28,7 +27,7 @@ dependencies {
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.config.yaml)
-    implementation("com.github.wanasit:kotori:0.0.3")
+    implementation("com.atilika.kuromoji:kuromoji-ipadic:0.9.0")
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }
