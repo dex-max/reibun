@@ -42,6 +42,5 @@ services:
       - 5173:5173
     volumes:
       - ./web:/src
-      - /src/node_modules
 volumes:
   postgres_data:
