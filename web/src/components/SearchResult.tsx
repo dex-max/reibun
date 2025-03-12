@@ -16,7 +16,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
           {sentence.segments.map((segment, i) => {
             return (
               <HoverCard key={i} openDelay={50} closeDelay={20}>
-                <HoverCardTrigger>
+                <HoverCardTrigger tabIndex={0}>
                   <span className={`relative text-lg border-b-2 border-dotted pb-0.5 mr-1 ${segment.highlight ? 'border-[#B28DDF]' : 'border-zinc-400'}`}>
                     {segment.highlight ? (
                       <strong className="text-[#8338EC] text-nowrap">{segment.surface}</strong>
