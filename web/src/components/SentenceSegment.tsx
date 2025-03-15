@@ -4,6 +4,10 @@ import DictionaryPopup from '@/components/DictionaryPopup'
 import type { Segment } from '@/types/language'
 
 const SentenceSegment = ({ segment }: { segment: Segment }) => {
+  if (segment.morphemes[0].partOfSpeech === '記号') {
+    return <span>{segment.surface}</span>
+  }
+
   return (
     <HoverCard openDelay={50} closeDelay={20}>
       <HoverCardTrigger tabIndex={0}>
