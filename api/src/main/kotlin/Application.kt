@@ -3,6 +3,7 @@ package net.reibun
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.calllogging.*
+import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
 
 fun main(args: Array<String>) {
@@ -14,6 +15,7 @@ fun Application.module() {
         json()
     }
     install(CallLogging)
+    install(Compression)
 
     configureRouting(getPostgresConnection())
 }

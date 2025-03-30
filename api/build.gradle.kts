@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.postgresql)
     implementation(libs.h2)
     implementation(libs.ktor.server.call.logging)
+    implementation(libs.ktor.server.compression)
     implementation(libs.ktor.server.cors)
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
