@@ -22,7 +22,7 @@ class DictionaryDatabase() {
 
             val words: List<String> = entry.jsonObject["kanji"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
             val readings: List<String> = entry.jsonObject["kana"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
-            val entryData = DictionaryEntry(words.firstOrNull() ?: "", definitions)
+            val entryData = DictionaryEntry(words.firstOrNull() ?: readings.firstOrNull() ?: "", definitions)
 
             words.forEach { wordMap.getOrPut(it) { mutableListOf() }.add(entryData) }
             readings.forEach { readingMap.getOrPut(it) { mutableListOf() }.add(entryData) }
