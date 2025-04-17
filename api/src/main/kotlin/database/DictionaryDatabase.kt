@@ -20,7 +20,9 @@ class DictionaryDatabase() {
                 sense.jsonObject["gloss"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
             }
 
-            val words: List<String> = entry.jsonObject["kanji"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
+            val words: List<String> = entry.jsonObject["kanji"]!!.jsonArray
+                .filter { it.jsonObject["tags"]!!.jsonArray.isEmpty() }
+                .map { it.jsonObject["text"]!!.jsonPrimitive.content }
             val readings: List<String> = entry.jsonObject["kana"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
             val entryData = DictionaryEntry(words.firstOrNull() ?: readings.firstOrNull() ?: "", definitions)
 
