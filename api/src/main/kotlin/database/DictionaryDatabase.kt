@@ -35,6 +35,8 @@ class DictionaryDatabase() {
         val entriesFromWords = wordMap[search] ?: listOf()
         val entriesFromReadings = readingMap[search] ?: listOf()
 
-        return (entriesFromWords + entriesFromReadings).distinct()
+        val matchingEntries = (entriesFromReadings + entriesFromWords).distinct()
+        val sortedByExactMatch = matchingEntries.sortedByDescending { it.term == search }
+        return sortedByExactMatch
     }
 }
