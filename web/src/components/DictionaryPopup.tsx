@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import type { Segment } from '@/types/language';
 import type { DictionaryEntry } from '@/types/dictionary';
 
+import DictionaryDefinition from '@/components/DictionaryDefinition';
+
 const DictionaryPopup = ({ segment }: { segment: Segment }) => {
   const [dictionaryEntries, setDictionaryEntries] = useState<DictionaryEntry[]>([]);
 
@@ -30,17 +32,8 @@ const DictionaryPopup = ({ segment }: { segment: Segment }) => {
   return (
     <>
       <ol>
-        {dictionaryEntries.map(({ term, definitions }, i) => (
-          <ul key={i}>
-            <li>
-              <strong>{term}</strong>
-              <ol>
-                {definitions.map((definition, j) => (
-                  <li key={j}>{definition}</li>
-                ))}
-              </ol>
-            </li>
-          </ul>
+        {dictionaryEntries.map((dictionaryEntry, i) => (
+          <DictionaryDefinition dictionaryEntry={dictionaryEntry} key={i} />
         ))}
       </ol>
     </>
