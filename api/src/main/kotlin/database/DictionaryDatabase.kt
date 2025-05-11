@@ -24,7 +24,10 @@ class DictionaryDatabase() {
                 .filter { it.jsonObject["tags"]!!.jsonArray.isEmpty() }
                 .map { it.jsonObject["text"]!!.jsonPrimitive.content }
             val readings: List<String> = entry.jsonObject["kana"]!!.jsonArray.map { it.jsonObject["text"]!!.jsonPrimitive.content }
-            val entryData = DictionaryEntry(words.firstOrNull() ?: readings.firstOrNull() ?: "", definitions)
+            val entryData = DictionaryEntry(
+                term = words.firstOrNull() ?: readings.firstOrNull() ?: "",
+                reading = readings.first(),
+                definitions = definitions);
 
             words.forEach { wordMap.getOrPut(it) { mutableListOf() }.add(entryData) }
             readings.forEach { readingMap.getOrPut(it) { mutableListOf() }.add(entryData) }

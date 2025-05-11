@@ -1,9 +1,12 @@
 import type { DictionaryEntry } from "@/types/dictionary";
 
-const DictionaryDefinition = ({dictionaryEntry: { term, definitions } }: { dictionaryEntry: DictionaryEntry }) => {
+const DictionaryDefinition = ({dictionaryEntry: { term, reading, definitions } }: { dictionaryEntry: DictionaryEntry }) => {
   return (
     <div>
-      <strong>{term}</strong>
+      <ruby>
+        <strong>{term}</strong>
+        <rt>{reading}</rt>
+      </ruby>
       <ol>
       {definitions.map((definition, j) => (
           <li key={j}>{definition}</li>
