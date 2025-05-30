@@ -3,7 +3,7 @@ import type { DictionaryEntry } from "@/types/dictionary";
 const DictionaryDefinition = ({dictionaryEntry: { term, reading, definitions } }: { dictionaryEntry: DictionaryEntry }) => {
   return (
     <div>
-      <ruby>
+      <ruby className="text-lg">
         <strong>{term}</strong>
         <rt>{reading}</rt>
       </ruby>
