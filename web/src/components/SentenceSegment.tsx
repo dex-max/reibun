@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 
 import DictionaryPopup from '@/components/DictionaryPopup'
@@ -11,13 +13,15 @@ const SentenceSegment = ({ segment }: { segment: Segment }) => {
   return (
     <HoverCard openDelay={50} closeDelay={20}>
       <HoverCardTrigger tabIndex={0}>
-        <span className={`relative text-lg border-b-2 border-dotted pb-0.5 mr-1 ${segment.highlight ? 'border-[#B28DDF]' : 'border-zinc-400'}`}>
-          {segment.highlight ? (
-            <strong className="text-[#8338EC] text-nowrap">{segment.surface}</strong>
-          ) : (
-            <span className="text-nowrap">{segment.surface}</span>
-          )}
-        </span>
+        <Link to={`/search/${segment.surface}`}>
+          <span className={`relative text-lg border-b-2 border-dotted pb-0.5 mr-1 ${segment.highlight ? 'border-[#B28DDF]' : 'border-zinc-400'}`}>
+            {segment.highlight ? (
+              <strong className="text-[#8338EC] text-nowrap">{segment.surface}</strong>
+            ) : (
+              <span className="text-nowrap">{segment.surface}</span>
+            )}
+          </span>
+        </Link>
       </HoverCardTrigger>
       <HoverCardContent side="top">
         <DictionaryPopup segment={segment} />
