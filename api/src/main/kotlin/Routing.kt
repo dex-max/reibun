@@ -26,8 +26,8 @@ fun Application.configureRouting(connection: Connection) {
                 return@get
             }
 
-            val results = sentenceDB.searchSentences(search)
-            call.respond(SearchSentencesResponse(results))
+            val result = sentenceDB.searchSentences(search)
+            call.respond(result)
         }
 
         get("/api/dictionary/{term}") {
@@ -38,8 +38,8 @@ fun Application.configureRouting(connection: Connection) {
                 return@get
             }
 
-            val results = dictionaryDB.searchDictionary(term)
-            call.respond(DictionaryResponse(results))
+            val result = dictionaryDB.searchDictionary(term)
+            call.respond(result)
         }
     }
 }

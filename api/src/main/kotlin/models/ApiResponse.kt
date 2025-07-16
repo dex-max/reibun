@@ -10,6 +10,7 @@ data class ApiError (
 
 @Serializable
 data class SearchSentencesResponse (
+    val count: Int,
     val data: List<Sentence>,
 )
 

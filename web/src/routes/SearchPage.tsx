@@ -8,6 +8,7 @@ import SearchResult from '@/components/SearchResult'
 const SearchPage = () => {
   const { searchTerm } = useParams();
   const [sentences, setSentences] = useState<Sentence[]>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
     const fetchSentences = async (searchTerm: string) => {
@@ -22,6 +23,7 @@ const SearchPage = () => {
 
         const apiData = await response.json();
         setSentences(apiData['data']);
+        setTotalCount(apiData['count'] ?? 0);
       } catch (error) {
         console.error('Error fetching sentences: ', error);
       }
@@ -35,7 +37,7 @@ const SearchPage = () => {
       <div className="m-auto w-[700px]">
         <h1 className="text-center text-3xl font-bold text-zinc-900 mt-20 mb-20">Sentence Search</h1>
         <SearchBar className="h-12" searchTerm={searchTerm}/>
-        <SearchResult sentences={sentences} />
+        <SearchResult sentences={sentences} totalCount={totalCount} />
       </div>
     </div>
   )

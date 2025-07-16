@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import SentenceSegment from './SentenceSegment'
 import type { Sentence } from '@/types/language'
 
-const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
+const SearchResult = ({ sentences, totalCount }: { sentences: Sentence[], totalCount: number }) => {
   if (sentences.length === 0) {
     return <div>No results found</div>
   }
@@ -20,7 +20,7 @@ const SearchResult = ({ sentences }: { sentences: Sentence[] }) => {
 
   return (
     <div className="mt-10">
-      <h2 className="text-xl mb-5">Search results</h2>
+      <h2 className="text-xl mb-5">Search results ({totalCount.toLocaleString()} sentences found)</h2>
       <div className="flex flex-col gap-3">
         {cardList}
       </div>

@@ -2,6 +2,7 @@ package net.reibun.database
 
 import kotlinx.serialization.json.*
 import net.reibun.models.DictionaryEntry
+import net.reibun.models.DictionaryResponse
 import java.util.zip.GZIPInputStream
 
 class DictionaryDatabase() {
@@ -34,12 +35,12 @@ class DictionaryDatabase() {
         }
     }
 
-    fun searchDictionary(search: String): List<DictionaryEntry> {
+    fun searchDictionary(search: String): DictionaryResponse {
         val entriesFromWords = wordMap[search] ?: listOf()
         val entriesFromReadings = readingMap[search] ?: listOf()
 
         val matchingEntries = (entriesFromReadings + entriesFromWords).distinct()
         val sortedByExactMatch = matchingEntries.sortedByDescending { it.term == search }
-        return sortedByExactMatch
+        return DictionaryResponse(sortedByExactMatch)
     }
 }
